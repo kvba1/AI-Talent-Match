@@ -1,0 +1,56 @@
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span><b>AI TALENT MATCH</b></span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened>
+    <h2>Selected Candidates</h2>
+    <ul>
+      <li *ngFor="let candidate of selectedCandidates">
+        <p>{{ candidate.first_name }}</p>
+        <!-- Add other candidate details here -->
+      </li>
+    </ul>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+      <div class="container">
+        <mat-card *ngIf="currentCandidate" class="candidate-card" [@cardAnimator]="animationState"
+        (@cardAnimator.done)="resetAnimationState()"
+        (swipeleft)='swipeLeft()' 
+        (swiperight)='swipeRight()'>
+          <img mat-card-image [src]="currentCandidate.imageUrl" alt="Random photo">
+          <div class="info">
+            <mat-card-content>
+              <div class="name">
+                <h2><b>{{ currentCandidate.first_name }} {{ currentCandidate.last_name }}</b></h2>
+              </div>
+              <p><b>Email: </b>{{ currentCandidate.email }}</p>
+              <p><b>Phone: </b> {{ currentCandidate.phone_number }}</p>
+              <a [routerLink]="[]" (click)="downloadResume(currentCandidate)">Download Resume</a>
+            </mat-card-content>
+          </div>
+          <div class="buttons">
+            <mat-card-actions class="actions">
+              <button mat-fab class="custom-fab" (click)="swipeLeft()">
+                <mat-icon>thumb_down</mat-icon>
+              </button>
+              <button mat-fab class="custom-fab" (click)="swipeRight()">
+                <mat-icon>thumb_up</mat-icon>
+              </button>
+            </mat-card-actions>
+          </div>
+        </mat-card>
+      </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,68 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+
+.buttons{
+  padding: 20px;
+}
+
+.name{
+  text-align: center;
+}
+
+.info{
+  padding-top: 10px;
+}
+
+.candidate-card {
+  padding: 5px;
+  width: 500px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.custom-fab{
+  background-color: rgb(255, 255, 255);
+}
+
+mat-card-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+button {
+  width: 100px;
+}
+
+/* Styling for the sidenav */
+.mat-sidenav {
+  width: 250px;
+  background-color: #ffffff; /* Light grey background */
+  padding: 20px;
+  border-right: 1px solid #ddd;
+}
+
+/* Main content area */
+.mat-sidenav-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0a66c2; /* White background */
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
