@@ -27,7 +27,7 @@ git clone https://github.com/kvba1/AI-Talent-Match.git
 #### Python app:
 
 ```bash
-cd AI-search-engine
+cd AI_search_engine_app
 pip install -r requirements.txt
 ```
 #### Angular app:
@@ -58,3 +58,8 @@ Navigate to `http://localhost:4200/` in your web browser to view the application
 ## Usage
 
 Swipe left or right on candidate cards to reject or select them, respectively. Click on the 'Download Resume' button on a candidate's profile to download their resume.
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
