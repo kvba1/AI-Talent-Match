@@ -20,17 +20,32 @@ Talent Match is a recruitment platform designed to help employers efficiently fi
 
 ### Installing
 
+#### Python app:
+
+```bash
+git clone https://github.com/kvba1/AI-Talent-Match.git
+cd AI-search-engine
+pip install -r requirements.txt
+```
+#### Angular app:
+
 Clone the repository and install the dependencies:
 
 ```bash
-git clone https://github.com/yourusername/SwipeRight.git
-cd SwipeRight
+git clone https://github.com/kvba1/AI-Talent-Match.git
+cd frontend
 npm install
 ```
 
 ### Executing Program
 
-Start the development server:
+Start the Python app:
+
+```bash
+python app.py
+```
+
+Start the Angular server:
 
 ```bash
 ng serve
