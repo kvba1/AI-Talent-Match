@@ -20,10 +20,13 @@ Talent Match is a recruitment platform designed to help employers efficiently fi
 
 ### Installing
 
+```bash
+git clone https://github.com/kvba1/AI-Talent-Match.git
+```
+
 #### Python app:
 
 ```bash
-git clone https://github.com/kvba1/AI-Talent-Match.git
 cd AI-search-engine
 pip install -r requirements.txt
 ```
@@ -32,7 +35,6 @@ pip install -r requirements.txt
 Clone the repository and install the dependencies:
 
 ```bash
-git clone https://github.com/kvba1/AI-Talent-Match.git
 cd frontend
 npm install
 ```
@@ -56,5 +58,3 @@ Navigate to `http://localhost:4200/` in your web browser to view the application
 ## Usage
 
 Swipe left or right on candidate cards to reject or select them, respectively. Click on the 'Download Resume' button on a candidate's profile to download their resume.
-
-## Documentation
