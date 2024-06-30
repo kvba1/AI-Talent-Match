@@ -1,27 +1,22 @@
-<mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span><b>AI TALENT MATCH</b></span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
-  </button>
-</mat-toolbar>
-
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav mode="side" opened>
-    <h2>Selected Candidates</h2>
+    <p class="side_header"><b>Selected Candidates</b></p>
+    <input type="search" placeholder="Search..." [(ngModel)]="searchQuery" class="search-bar">
     <ul>
-      <li *ngFor="let candidate of selectedCandidates">
-        <p>{{ candidate.first_name }}</p>
-        <!-- Add other candidate details here -->
-      </li>
+      <div class="side_container">
+        <li *ngFor="let candidate of selectedCandidates | filter:searchQuery">
+          <div class="profile">
+            <img class="side-img" [src]="candidate.imageUrl" alt="Random photo">
+            <p>{{ candidate.first_name }} {{candidate.last_name}}</p>
+          </div>
+          <button mat-fab class="custom-fab" [ngStyle]="{transform: 'scale(0.7)'}">
+            <mat-icon class="icon">chat</mat-icon>
+          </button>
+        </li>
+      </div>
     </ul>
   </mat-sidenav>
+  
 
   <mat-sidenav-content>
       <div class="container">
@@ -35,6 +30,7 @@
               <div class="name">
                 <h2><b>{{ currentCandidate.first_name }} {{ currentCandidate.last_name }}</b></h2>
               </div>
+              <p><b>Candidate Match: </b>{{ (currentCandidate.score * 100) | number:'1.2-2' }} %</p>
               <p><b>Email: </b>{{ currentCandidate.email }}</p>
               <p><b>Phone: </b> {{ currentCandidate.phone_number }}</p>
               <a [routerLink]="[]" (click)="downloadResume(currentCandidate)">Download Resume</a>

@@ -5,9 +5,9 @@ from database import get_candidates
 from candidate import Candidate
 
 
-def get_top_N_candidates(N: int, ):
+def get_top_N_candidates(N: int, file_path :str):
     bi_encoder = get_bi_encoder()
-    job_offer_text = extract_text_from_pdf('./data/job_offer.pdf')
+    job_offer_text = extract_text_from_pdf(file_path)
     candidates_df = get_candidates('./data/resumes.db')
     
     # Encode job offer

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -9,25 +12,48 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent {
   selectedFile: File | null = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private snackBar: MatSnackBar  // Inject MatSnackBar
+  ) {}
 
   onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
+    const element = event.currentTarget as HTMLInputElement;
+    let fileList: FileList | null = element.files;
+    if (fileList) {
+      this.selectedFile = fileList[0];
+    } else {
+      this.selectedFile = null;
     }
   }
 
-  uploadFile(): void {
-    if (this.selectedFile) {
-      const formData = new FormData();
-      formData.append('file', this.selectedFile, this.selectedFile.name);
+  async upload(): Promise<void> {
+    if (!this.selectedFile) {
+      console.error('No file selected!');
+      return;
+    }
 
-      this.http.post('/api/upload', formData).subscribe(response => {
-        console.log('File uploaded successfully', response);
-      }, error => {
-        console.error('File upload failed', error);
-      });
+    const formData = new FormData();
+    formData.append('file', this.selectedFile, this.selectedFile.name);
+
+    try {
+      const response = await lastValueFrom(this.http.post('http://localhost:5001/upload', formData, {
+        observe: 'response'
+      }));
+      console.log('Response:', response);
+      if (response.status === 200) {
+        // Display a message
+        this.snackBar.open('Upload successful, navigating shortly...', 'Close', {
+          duration: 3000  // Message duration
+        });
+
+        setTimeout(() => {
+          this.router.navigate(['/candidates']);
+        }, 3000);
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
   }
 }

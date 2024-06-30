@@ -1,6 +1,24 @@
-<div class="upload-container">
-    <h1>Upload Job Offer PDF</h1>
-    <input type="file" (change)="onFileSelected($event)" accept="application/pdf">
-    <button (click)="uploadFile()">Upload</button>
+<div class="home-page">
+    <div class="home-page-content">
+      <mat-card class="card" appearance="outlined">
+        <img mat-card-image src="/logo.png">
+        <mat-card-content>
+            <h2><b>AI Talent Match</b></h2>
+            <p>Your AI recruitment assistant!</p>
+            <div class="file-card">
+              <p><b>Choose your PDF job offer file:</b></p>
+              <input type="file" (change)="onFileSelected($event)">
+            </div> 
+          <form class="example-form">
+            <mat-form-field class="example-full-width">
+              <mat-label>Numer of candidates to review</mat-label>
+              <input type="number" matInput placeholder="How many candidates?">
+              <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+          </form>
+          <button mat-raised-button class="upload-button" (click)="upload()">Upload</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
   

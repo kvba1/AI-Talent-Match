@@ -21,34 +21,32 @@ export class CandidateComponent implements OnInit {
   selectedCandidates: Candidate[] = []; 
   currentIndex: number = 0;
   currentCandidate: Candidate | null = null;
-  placeholderImage: string = 'https://thispersondoesnotexist.com/';
   animationState: string = '';
-
+  searchQuery: string = '';
 
   constructor(private candidateService: CandidateService) { }
 
   ngOnInit(): void {
     this.candidateService.getCandidates().subscribe((data: Candidate[]) => {
-      this.candidates = data.map((candidate: Candidate) => ({
+      this.candidates = data.map((candidate: Candidate, index: number) => ({
         ...candidate,
-        imageUrl: this.placeholderImage
+        imageUrl: `imgs/candidate${index + 1}.jpg`
       }));
       
       this.currentCandidate = this.candidates[this.currentIndex];
     });
   }
 
-  startAnimation(state :string) {
+  startAnimation(state: string) {
     if (!this.animationState) {
       this.animationState = state;
     }
   }
 
   resetAnimationState() {
-    // Only push to selectedCandidates if the animation was for swipe right
     if (this.animationState === 'swiperight' && this.currentCandidate) {
       this.selectedCandidates.push(this.currentCandidate);
-      console.log(this.selectedCandidates)
+      console.log(this.selectedCandidates);
     }
     this.animationState = '';
     this.advanceCandidate();
@@ -60,7 +58,6 @@ export class CandidateComponent implements OnInit {
 
   swipeRight() {
     this.startAnimation('swiperight');
-    
   }
 
   advanceCandidate() {

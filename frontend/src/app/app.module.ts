@@ -13,12 +13,20 @@ import { CandidateComponent } from './candidate/candidate.component';
 import { CandidateService } from './candidate.service';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FilterPipe } from './filter.pipe';
+import { FormsModule } from '@angular/forms';
+import {MatFormField, MatFormFieldModule} from '@angular/material/form-field';
+import { MatLabel } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 @NgModule({
   declarations: [
     AppComponent,
     CandidateComponent,
-    HomeComponent
+    HomeComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -30,7 +38,13 @@ import { AppRoutingModule } from './app-routing.module';
     HammerModule,
     MatIconModule,
     AppRoutingModule,
-    MatToolbarModule
+    MatToolbarModule,
+    FormsModule,
+    MatLabel,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSnackBarModule,
+    NgxMatFileInputModule
   ],
   providers: [CandidateService],
   bootstrap: [AppComponent]
