@@ -6,9 +6,6 @@
 
 ## Description
 
-<<<<<<< HEAD
-Talent Match is a recruitment app designed to help employers efficiently find top candidates using advanced AI models. The app leverage bi-encoder model to match job offers with the most suitable candidates from a comprehensive database. Employers can upload job offers in PDF format, which are then parsed and analyzed to provide a list of the best-matched candidates. The platform features a Tinder-like swipe interface, allowing employers to easily review and shortlist candidates.
-=======
 Talent Match is a recruitment platform designed to help employers efficiently find top candidates using advanced AI models. The app leverage bi-encoder model to match job offers with the most suitable candidates from a comprehensive database. Employers can upload job offers in PDF format, which are then parsed and analyzed to provide a list of the best-matched candidates. The platform features a Tinder-like swipe interface, allowing employers to easily review and shortlist candidates. This innovative approach streamlines the hiring process, ensuring accuracy and saving time.
 
 ## Features
@@ -70,4 +67,3 @@ Swipe left or right on candidate cards to reject or select them, respectively. C
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
->>>>>>> 36b4a3e009d9a6d9d9aa57c7449753807648c5d2
