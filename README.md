@@ -2,7 +2,7 @@
 
 ## Overview
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/4xeI_ARBJxQ/0.jpg)](https://www.youtube.com/watch?v=4xeI_ARBJxQ)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YnhQ-HOFc3M/0.jpg)](https://www.youtube.com/watch?v=YnhQ-HOFc3M)
 
 ## Description
 
