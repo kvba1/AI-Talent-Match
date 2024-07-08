@@ -16,6 +16,15 @@ Check out my YouTube video below:
 
 ## Getting Started
 
+### Run the app with Docker:
+
+```bash
+git clone https://github.com/kvba1/AI-Talent-Match.git
+
+docker-compose up --build
+```
+### Alternatively:
+
 ### Dependencies
 
 - Requires Angular 11 or later.
