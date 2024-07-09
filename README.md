@@ -48,7 +48,7 @@ Clone the repository and install the dependencies:
 
 ```bash
 cd frontend
-npm install
+npm install --legacy-peer-deps
 ```
 
 #### Executing Program
