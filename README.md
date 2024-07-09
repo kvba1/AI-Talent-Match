@@ -25,18 +25,18 @@ docker-compose up --build
 ```
 ### Alternatively:
 
-### Dependencies
+#### Dependencies
 
 - Requires Angular 11 or later.
 - Compatible with modern browsers such as Chrome, Firefox, Safari, and Edge.
 
-### Installing
+#### Installing
 
 ```bash
 git clone https://github.com/kvba1/AI-Talent-Match.git
 ```
 
-#### Python app:
+##### Python app:
 
 ```bash
 cd AI_search_engine_app
@@ -51,7 +51,7 @@ cd frontend
 npm install
 ```
 
-### Executing Program
+#### Executing Program
 
 Start the Python app:
 
