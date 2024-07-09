@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CandidateService } from '../candidate.service';
-import { Candidate } from '../candidate.model';  // Import the Candidate interface
-import { trigger, keyframes, animate, transition } from "@angular/animations";
+import { Candidate } from '../candidate.model';
+import { trigger, keyframes, animate, transition } from '@angular/animations';
 import * as kf from './keyframes';
 import jsPDF from 'jspdf';
 
@@ -18,7 +18,7 @@ import jsPDF from 'jspdf';
 })
 export class CandidateComponent implements OnInit {
   candidates: Candidate[] = [];
-  selectedCandidates: Candidate[] = []; 
+  selectedCandidates: Candidate[] = [];
   currentIndex: number = 0;
   currentCandidate: Candidate | null = null;
   animationState: string = '';
@@ -33,38 +33,55 @@ export class CandidateComponent implements OnInit {
         imageUrl: `imgs/candidate${index + 1}.jpg`
       }));
       
-      this.currentCandidate = this.candidates[this.currentIndex];
+      console.log(`Total candidates fetched: ${this.candidates.length}`);
+      if (this.candidates.length > 0) {
+        this.currentIndex = 0;
+        this.currentCandidate = this.candidates[this.currentIndex];
+      } else {
+        this.currentCandidate = null;
+      }
     });
   }
 
   startAnimation(state: string) {
     if (!this.animationState) {
+      console.log(`Start animation: ${state}`);
       this.animationState = state;
     }
   }
 
   resetAnimationState() {
-    if (this.animationState === 'swiperight' && this.currentCandidate) {
-      this.selectedCandidates.push(this.currentCandidate);
-      console.log(this.selectedCandidates);
+    console.log('Reset animation state:', this.animationState);
+    if (this.animationState) { // Ensure this block only executes once per animation
+      if (this.animationState === 'swiperight' && this.currentCandidate) {
+        this.selectedCandidates.push(this.currentCandidate);
+        console.log('Selected candidates:', this.selectedCandidates);
+      }
+      this.advanceCandidate();
+      this.animationState = '';
     }
-    this.animationState = '';
-    this.advanceCandidate();
   }
 
   swipeLeft() {
+    console.log('Swipe left triggered');
     this.startAnimation('swipeleft');
   }
 
   swipeRight() {
+    console.log('Swipe right triggered');
     this.startAnimation('swiperight');
   }
 
   advanceCandidate() {
+    console.log('Advancing candidate');
     this.currentIndex++;
+    console.log('Current index:', this.currentIndex);
+    console.log('Candidates length:', this.candidates.length);
+
     if (this.currentIndex < this.candidates.length) {
       this.currentCandidate = this.candidates[this.currentIndex];
     } else {
+      console.log('No more candidates to display');
       this.currentCandidate = null;
     }
   }

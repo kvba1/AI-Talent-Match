@@ -1,20 +1,27 @@
-// src/app/candidate.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Candidate } from './candidate.model';  // Import the Candidate interface
+import { Candidate } from './candidate.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CandidateService {
 
-  private apiUrl = 'http://localhost:5001/top_candidates?n=50';
+  numberCandidates = 50;
+  private apiUrl = 'http://localhost:5001/top_candidates';
 
   constructor(private http: HttpClient) { }
 
-  getCandidates(): Observable<Candidate[]> {
-    return this.http.get<Candidate[]>(this.apiUrl);
+  setNumberCandidates(count: number) {
+    this.numberCandidates = count;
   }
 
+  private getApiUrl(): string {
+    return `${this.apiUrl}?n=${this.numberCandidates}`;
+  }
+
+  getCandidates(): Observable<Candidate[]> {
+    return this.http.get<Candidate[]>(this.getApiUrl());
+  }
 }

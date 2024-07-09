@@ -11,8 +11,8 @@
             </div> 
           <form class="example-form">
             <mat-form-field class="example-full-width">
-              <mat-label>Numer of candidates to review</mat-label>
-              <input type="number" matInput placeholder="How many candidates?">
+              <mat-label>Number of candidates to review</mat-label>
+              <input type="number" matInput placeholder="How many candidates?" (change)="onCandidatesChange($event)">
               <mat-icon matSuffix>mode_edit</mat-icon>
             </mat-form-field>
           </form>

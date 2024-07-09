@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
 import { lastValueFrom } from 'rxjs';
+import { CandidateService } from '../candidate.service';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +12,15 @@ import { lastValueFrom } from 'rxjs';
 })
 export class HomeComponent {
   selectedFile: File | null = null;
+  numCandidates: number = 50;
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private snackBar: MatSnackBar  // Inject MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private candidateService: CandidateService
+  ) {
+  }
 
   onFileSelected(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
@@ -55,5 +59,11 @@ export class HomeComponent {
     } catch (error) {
       console.error('Error:', error);
     }
+  }
+
+  onCandidatesChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    this.numCandidates = parseInt(inputElement.value, 10);
+    this.candidateService.setNumberCandidates(this.numCandidates);
   }
 }

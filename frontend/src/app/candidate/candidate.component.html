@@ -17,36 +17,35 @@
     </ul>
   </mat-sidenav>
   
-
   <mat-sidenav-content>
-      <div class="container">
-        <mat-card *ngIf="currentCandidate" class="candidate-card" [@cardAnimator]="animationState"
-        (@cardAnimator.done)="resetAnimationState()"
-        (swipeleft)='swipeLeft()' 
-        (swiperight)='swipeRight()'>
-          <img mat-card-image [src]="currentCandidate.imageUrl" alt="Random photo">
-          <div class="info">
-            <mat-card-content>
-              <div class="name">
-                <h2><b>{{ currentCandidate.first_name }} {{ currentCandidate.last_name }}</b></h2>
-              </div>
-              <p><b>Candidate Match: </b>{{ (currentCandidate.score * 100) | number:'1.2-2' }} %</p>
-              <p><b>Email: </b>{{ currentCandidate.email }}</p>
-              <p><b>Phone: </b> {{ currentCandidate.phone_number }}</p>
-              <a [routerLink]="[]" (click)="downloadResume(currentCandidate)">Download Resume</a>
-            </mat-card-content>
-          </div>
-          <div class="buttons">
-            <mat-card-actions class="actions">
-              <button mat-fab class="custom-fab" (click)="swipeLeft()">
-                <mat-icon>thumb_down</mat-icon>
-              </button>
-              <button mat-fab class="custom-fab" (click)="swipeRight()">
-                <mat-icon>thumb_up</mat-icon>
-              </button>
-            </mat-card-actions>
-          </div>
-        </mat-card>
-      </div>
+    <div class="container">
+      <mat-card *ngIf="currentCandidate" class="candidate-card" [@cardAnimator]="animationState"
+      (@cardAnimator.done)="resetAnimationState()"
+      (swipeleft)="swipeLeft()"
+      (swiperight)="swipeRight()">
+        <img mat-card-image [src]="currentCandidate.imageUrl" alt="Random photo">
+        <div class="info">
+          <mat-card-content>
+            <div class="name">
+              <h2><b>{{ currentCandidate.first_name }} {{ currentCandidate.last_name }}</b></h2>
+            </div>
+            <p><b>Candidate Match: </b>{{ (currentCandidate.score * 100) | number:'1.2-2' }} %</p>
+            <p><b>Email: </b>{{ currentCandidate.email }}</p>
+            <p><b>Phone: </b> {{ currentCandidate.phone_number }}</p>
+            <a [routerLink]="[]" (click)="downloadResume(currentCandidate)">Download Resume</a>
+          </mat-card-content>
+        </div>
+        <div class="buttons">
+          <mat-card-actions class="actions">
+            <button mat-fab class="custom-fab" (click)="swipeLeft()">
+              <mat-icon>thumb_down</mat-icon>
+            </button>
+            <button mat-fab class="custom-fab" (click)="swipeRight()">
+              <mat-icon>thumb_up</mat-icon>
+            </button>
+          </mat-card-actions>
+        </div>
+      </mat-card>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
