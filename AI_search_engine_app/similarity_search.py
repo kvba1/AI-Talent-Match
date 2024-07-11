@@ -3,33 +3,39 @@ from sklearn.metrics.pairwise import cosine_similarity
 from pdf_tools import extract_text_from_pdf
 from database import get_candidates
 from candidate import Candidate
+import pandas as pd
 
-
-def get_top_N_candidates(N: int, file_path :str):
-    bi_encoder = get_bi_encoder()
+def get_top_N_candidates(N: int, file_path: str):
     job_offer_text = extract_text_from_pdf(file_path)
     candidates_df = get_candidates('./data/resumes.db')
     
-    # Encode job offer
-    job_offer_embedding = bi_encoder.encode(job_offer_text, convert_to_tensor=True)
-    # Encode candidate resumes
-    candidate_embeddings = bi_encoder.encode(candidates_df['Resume'].tolist(), convert_to_tensor=True)
+    job_offer_embedding = encode_texts([job_offer_text])[0]
+    candidate_embeddings = encode_texts(candidates_df['Resume'].tolist())
     
-    job_offer_embedding = job_offer_embedding.cpu()
-    candidate_embeddings = candidate_embeddings.cpu()
+    cosine_similarities = compute_cosine_similarities(job_offer_embedding, candidate_embeddings)
     
-    # Compute cosine similarities
-    cosine_similarities = cosine_similarity([job_offer_embedding], candidate_embeddings)
+    top_n_candidates_df = get_top_n_candidates_df(candidates_df, cosine_similarities, N)
     
-    # Get top N candidates (e.g., top 50)
+    top_n_candidates = create_candidate_objects(top_n_candidates_df)
+    
+    return top_n_candidates
+
+def encode_texts(texts: list):
+    bi_encoder = get_bi_encoder()
+    embeddings = bi_encoder.encode(texts, convert_to_tensor=True)
+    return embeddings.cpu()
+
+def compute_cosine_similarities(job_offer_embedding, candidate_embeddings):
+    return cosine_similarity([job_offer_embedding], candidate_embeddings)
+
+def get_top_n_candidates_df(candidates_df: pd.DataFrame, cosine_similarities, N: int):
     top_n_indices = cosine_similarities[0].argsort()[-N:][::-1]
     top_n_candidates_df = candidates_df.iloc[top_n_indices]
-    
-    # Add score field
     top_n_candidates_df['Score'] = cosine_similarities[0][top_n_indices]
-    
-    # Create Candidate objects
-    top_n_candidates = [
+    return top_n_candidates_df
+
+def create_candidate_objects(top_n_candidates_df: pd.DataFrame):
+    return [
         Candidate(
             category=row['Category'],
             resume=row['Resume'],
@@ -41,5 +47,3 @@ def get_top_N_candidates(N: int, file_path :str):
         )
         for _, row in top_n_candidates_df.iterrows()
     ]
-    
-    return top_n_candidates

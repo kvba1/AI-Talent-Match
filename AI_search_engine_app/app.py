@@ -3,7 +3,6 @@ from similarity_search import get_top_N_candidates
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
-import mimetypes
 
 app = Flask(__name__)
 CORS(app)
@@ -13,9 +12,12 @@ current_file_path = None
 @app.route('/upload', methods=['POST'])
 def upload_file():
     global current_file_path
+    
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'}), 400
+    
     file = request.files['file']
+    
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
     
@@ -32,6 +34,7 @@ def upload_file():
 @app.route('/top_candidates', methods=['GET'])
 def get_top_candidates():
     global current_file_path
+    
     if not current_file_path:
         return jsonify({'error': 'No file has been uploaded'}), 400
 
