@@ -19,7 +19,6 @@ if not db_path:
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    
         if 'file' not in request.files:
             return jsonify({'error': 'No file part'}), 400
         
@@ -50,8 +49,7 @@ def upload_file():
                 
 
 @app.route('/top_candidates', methods=['GET'])
-def get_top_candidates():
-        
+def get_top_candidates():     
         top_candidates_df = get_candidates_df('top_candidates', db_path)
         if not top_candidates_df.empty:
             top_candidates = [
