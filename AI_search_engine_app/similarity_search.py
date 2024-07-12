@@ -1,13 +1,13 @@
 from models import get_bi_encoder
 from sklearn.metrics.pairwise import cosine_similarity
 from pdf_tools import extract_text_from_pdf
-from database import get_candidates
+from database import get_candidates_df
 from candidate import Candidate
 import pandas as pd
 
 def get_top_N_candidates(N: int, file_path: str):
     job_offer_text = extract_text_from_pdf(file_path)
-    candidates_df = get_candidates('./data/resumes.db')
+    candidates_df = get_candidates_df('resumes', './data/resumes.db')
     
     job_offer_embedding = encode_texts([job_offer_text])[0]
     candidate_embeddings = encode_texts(candidates_df['Resume'].tolist())

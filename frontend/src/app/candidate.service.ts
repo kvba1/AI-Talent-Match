@@ -18,7 +18,7 @@ export class CandidateService {
   }
 
   private getApiUrl(): string {
-    return `${this.apiUrl}?n=${this.numberCandidates}`;
+    return `${this.apiUrl}`;
   }
 
   getCandidates(): Observable<Candidate[]> {

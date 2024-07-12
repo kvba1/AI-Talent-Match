@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { lastValueFrom } from 'rxjs';
 import { CandidateService } from '../candidate.service';
 
@@ -19,8 +19,7 @@ export class HomeComponent {
     private router: Router,
     private snackBar: MatSnackBar,
     private candidateService: CandidateService
-  ) {
-  }
+  ) {}
 
   onFileSelected(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
@@ -42,7 +41,7 @@ export class HomeComponent {
     formData.append('file', this.selectedFile, this.selectedFile.name);
 
     try {
-      const response = await lastValueFrom(this.http.post('http://localhost:5001/upload', formData, {
+      const response = await lastValueFrom(this.http.post(`http://localhost:5001/upload?n=${this.numCandidates}`, formData, {
         observe: 'response'
       }));
       console.log('Response:', response);
@@ -58,6 +57,9 @@ export class HomeComponent {
       }
     } catch (error) {
       console.error('Error:', error);
+      this.snackBar.open('Upload failed. Please try again.', 'Close', {
+        duration: 3000  // Message duration
+      });
     }
   }
 
